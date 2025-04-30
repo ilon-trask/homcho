@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@google/genai": "^0.10.0",
+    "autoevals": "^0.0.127",
+    "braintrust": "^0.0.201",
+    "zod": "^3.24.3"
+  },
+  "scripts": {
+    "eval": "npx braintrust eval evaluator/evaluator.eval.ts "
+  }
+}
