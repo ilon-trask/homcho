@@ -1,8 +1,9 @@
-import { initDataset } from "braintrust";
+import { initDataset, loadPrompt } from "braintrust";
 import realProgramsScorer from "./realProgramsScorer.ts";
 import workflow from "./workflow.ts";
 
 Deno.env.set("BRAINTRUST_API_KEY", "sk-FIFBl10WYUSe72Bmb1bbAxXPTKLnuxcy30pQUiSaLj8txUTu")
+
 async function main() {
     const dataset = initDataset("homcho", { dataset: "first" });
     // console.log(dataset);

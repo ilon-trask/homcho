@@ -1,8 +1,7 @@
-import braintrust from "braintrust";
-import { Factuality, Score } from "autoevals";
+import braintrust, { loadPrompt } from "braintrust";
+import { Factuality, Score, } from "autoevals";
 import ai from "./ai.ts";
 import { z } from "zod";
-
 
 
 
@@ -13,24 +12,10 @@ async function realProgramsEvaluator(input: string) {
     responseMimeType: 'text/plain',
     systemInstruction: [
       {
-        text: `#System prompt
-              check if programs from this text actually exist. 
-              Use web search for checking. 
-              Name should be exact same as in the input, it can't be part of name or half or it, name of area or department or specialization, also it can't be name of master only bachelor, only whole exact name of program.  
-              If there is just similar programs it's still not the one. 
-              Return regualr plain text to just display data.
-              You should pay close attention whether the program is bachelor or master, approve only bachelor programs.
-
-              #Search format:
-              {uni_name} program:{program_name}
-
-              #Format of answer:
-
-              {uni_name}:
-              {program_name}: {yes or no}
-
-              All programs are real: {0 or 0.33 or 0.67 or 1} 
-`,
+        text: (await loadPrompt({
+          projectName: "homcho",
+          slug: "evaluator_prompt"
+        })).prompt?.messages?.[0]?.content,
       }
     ],
   };
